@@ -2,7 +2,7 @@
 
 const got = require('got');
 
-const prompt = require('prompt-sync');
+const prompt = require('prompt-sync')();
 
 const APIKey = '6e603ffc-5522-49d3-aa02-094f23c9f4fb';
 
@@ -17,13 +17,24 @@ const grabPromise = async () => {
                 name.push(a);
             }
             return name;
+            console.log(name);
 
         })).then(( name => {
             const userInput = prompt("Name the location: ");
-            if (userInput.toLowerCase() === name["name"]);
+            for (const location of name){
+                if (userInput.toLowerCase() === location["name"].toLowerCase()){
+                    got.get(
+                        "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/" + location["id"] + "?res=daily&key=" + (APIKey)
+                    ).json()
+                    .then(( body => {
+                        console.log(body.SiteRep.Wx.Param)
+                    }))
+                    break;
+                }
+            }
             
         }));
-    // console.log(mainBody);
+
     
 
 }
