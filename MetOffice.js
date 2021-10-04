@@ -20,7 +20,7 @@ const grabPromise = async () => {
 
         })).then(( name => {
             const userInput = prompt("Name the location: ");
-            if userInput.toLowerCase() === name["name"];
+            if (userInput.toLowerCase() === name["name"]);
             
         }));
     // console.log(mainBody);
