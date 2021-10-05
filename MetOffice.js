@@ -1,10 +1,20 @@
 // Met Office API Task :)
 
 const got = require("got");
-
+const express = require('express')
+const app = express()
 const prompt = require("prompt-sync")();
-
 const APIKey = "6e603ffc-5522-49d3-aa02-094f23c9f4fb";
+
+app.get('/forecast', function (req, res) {
+  res.send('Hello World');
+})
+app.use(express.static('frontend'));
+ 
+app.listen(3000, function(){
+  console.log('Webiste Created');
+
+})
 
 class locationName {
   constructor(name, id) {
