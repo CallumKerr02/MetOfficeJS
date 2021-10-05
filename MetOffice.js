@@ -6,6 +6,13 @@ const prompt = require('prompt-sync')();
 
 const APIKey = '6e603ffc-5522-49d3-aa02-094f23c9f4fb';
 
+class locationName{
+    constructor(name, id){
+        this.name = name;
+        this.id = id;
+    }
+}
+
 const grabPromise = async () => {
     got.get(    // async to this code, get this info.
             "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=" + (APIKey)
@@ -20,7 +27,10 @@ const grabPromise = async () => {
             console.log(name);
 
         })).then(( name => {
-            const userInput = prompt("Name the location: ");
+            for (const printingLocation of name){
+                console.log(printingLocation["name"]);
+            }
+            const userInput = prompt("Enter Location Name: ");
             for (const location of name){
                 if (userInput.toLowerCase() === location["name"].toLowerCase()){
                     got.get(
@@ -31,9 +41,12 @@ const grabPromise = async () => {
                     }))
                     break;
                 }
+                }
+                
             }
             
-        }));
+            
+        ));
 
     
 
