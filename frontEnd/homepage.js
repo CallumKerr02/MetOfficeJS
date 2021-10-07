@@ -18,7 +18,7 @@ function locationSearch() {
       fetch("/forecast?id=" + location.id)
         .then((response) => response.json()) 
         .then((forecast) => {
-          document.getElementById("results").innerHTML = "this is the forecast " + forecast.Period[0].Rep["D"]; // could be getelementbyid
+          document.getElementById("results").innerHTML = "this is the forecast " + forecast.direction; // could be getelementbyid
           console.log(forecast);
         });
     }
